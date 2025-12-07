@@ -616,31 +616,43 @@
           v.image ||
           v.preview ||
           v.poster ||
-          '';
+          "";
 
-        // If no explicit thumbnail, generate one from video path
+        // Some APIs send an array of thumbs
+        if (!thumb && Array.isArray(v.thumbs) && v.thumbs.length > 0) {
+          thumb = v.thumbs[0];
+        }
+
+        // If still no thumbnail, try generating one from video path
         if (!thumb) {
           thumb = getThumbnailFromVideo(v);
         }
 
-        if (thumb) {
-          if (thumb.startsWith('//')) {
-            thumb = 'https:' + thumb;
-          } else if (thumb.startsWith('http://')) {
-            thumb = thumb.replace('http://', 'https://');
-          }
+        // FINAL fallback: use a local placeholder so cards never look broken
+        if (!thumb) {
+          thumb = "/default-thumb.jpg"; // <-- put any placeholder here
         }
 
-        const thumbSrc = thumb || '';
+        // Normalize protocol
+        if (thumb.startsWith("//")) {
+          thumb = "https:" + thumb;
+        } else if (thumb.startsWith("http://")) {
+          thumb = thumb.replace("http://", "https://");
+        }
+
+        const thumbSrc = thumb;
+
 
         return `
           <div class="video">
             <div class="thumb-wrapper">
-              ${
+                            ${
                 thumbSrc
-                  ? `<img src="${thumbSrc}" alt="${title}" class="thumb-img" loading="lazy" />`
+                  ? `<img src="${thumbSrc}" alt="${title}" class="thumb-img" loading="lazy"
+                       onerror="this.onerror=null;this.src='/default-thumb.jpg';" />`
                   : ''
               }
+
               <span class="thumb-duration">${duration}</span>
             </div>
 
