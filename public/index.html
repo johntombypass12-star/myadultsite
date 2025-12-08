@@ -528,6 +528,7 @@
     </div>
   </div>
 
+  <!-- MAIN APP SCRIPT -->
   <script>
     const searchInput = document.getElementById('searchInput');
     const searchBtn = document.getElementById('searchBtn');
@@ -642,11 +643,10 @@
 
         const thumbSrc = thumb;
 
-
         return `
           <div class="video">
             <div class="thumb-wrapper">
-                            ${
+              ${
                 thumbSrc
                   ? `<img src="${thumbSrc}" alt="${title}" class="thumb-img" loading="lazy"
                        onerror="this.onerror=null;this.src='/default-thumb.jpg';" />`
@@ -745,6 +745,52 @@
 
     checkAgeGate();
   </script>
+
+  <!-- POPADS POPUNDER CODE -->
+  <script type="text/javascript" data-cfasync="false">
+  /*<![CDATA[/* */
+  (function(){
+    var m = window,
+        x = "a6dd291067675fb2c7e67edfbbf2f577",
+        n = [
+          ["siteId", 341+259*58*903*754-10222650159],
+          ["minBid", 0],
+          ["popundersPerIP", "0"],
+          ["delayBetween", 0],
+          ["default", false],
+          ["defaultPerDay", 0],
+          ["topmostLayer", "auto"]
+        ],
+        y = [
+          "d3d3LmNkbjRhZHMuY29tL0QvcW1hcmtlcmNsdXN0ZXJlcl9jb21waWxlZC5qcw==",
+          "ZDNnNW92Zm5nanc5YncuY2xvdWRmcm9udC5uZXQvU1pmL1FKWS9ianMtZGF0YS1hbmd1bGFyLm1pbi5jc3M="
+        ],
+        j = -1, b, o,
+        t = function(){
+          clearTimeout(o);
+          j++;
+          if (y[j] && !(1791139908000 < (new Date).getTime() && 1 < j)) {
+            b = m.document.createElement("script");
+            b.type = "text/javascript";
+            b.async = !0;
+            var u = m.document.getElementsByTagName("script")[0];
+            b.src = "https://" + atob(y[j]);
+            b.crossOrigin = "anonymous";
+            b.onerror = t;
+            b.onload = function(){
+              clearTimeout(o);
+              m[x.slice(0,16)+x.slice(0,16)] || t();
+            };
+            o = setTimeout(t, 5E3);
+            u.parentNode.insertBefore(b, u);
+          }
+        };
+    if (!m[x]) {
+      try { Object.freeze(m[x] = n); } catch(e) {}
+      t();
+    }
+  })();
+  /*]]>/* */
+  </script>
 </body>
 </html>
-
