@@ -538,8 +538,7 @@
 
     const AGE_KEY = 'svb_age_verified';
 
-    // MULTIPLE PPC REDIRECT CLICKS
-    // Put your PPC / smartlink URL here:
+    // 🔴 YOUR SMARTLINK / PPC URL – CHANGE THIS TO YOUR REAL LINK
     const AD_URL = 'https://your-ad-url-here.com';
     let adClickCount = 0;
     const MAX_AD_CLICKS = 10; // how many times to fire
@@ -547,7 +546,7 @@
     function handleAdClick(event) {
       const tag = event.target.tagName.toLowerCase();
 
-      // Ignore clicks on UI controls / important stuff
+      // Ignore clicks on UI controls / age gate
       if (
         tag === 'input' ||
         tag === 'button' ||
@@ -619,22 +618,18 @@
           v.poster ||
           "";
 
-        // Some APIs send an array of thumbs
         if (!thumb && Array.isArray(v.thumbs) && v.thumbs.length > 0) {
           thumb = v.thumbs[0];
         }
 
-        // If still no thumbnail, try generating one from video path
         if (!thumb) {
           thumb = getThumbnailFromVideo(v);
         }
 
-        // FINAL fallback: use a local placeholder so cards never look broken
         if (!thumb) {
-          thumb = "/default-thumb.jpg"; // <-- put any placeholder here
+          thumb = "/default-thumb.jpg";
         }
 
-        // Normalize protocol
         if (thumb.startsWith("//")) {
           thumb = "https:" + thumb;
         } else if (thumb.startsWith("http://")) {
@@ -652,7 +647,6 @@
                        onerror="this.onerror=null;this.src='/default-thumb.jpg';" />`
                   : ''
               }
-
               <span class="thumb-duration">${duration}</span>
             </div>
 
@@ -746,14 +740,14 @@
     checkAgeGate();
   </script>
 
-  <!-- POPADS POPUNDER CODE -->
+  <!-- POPADS POPUNDER CODE (AS YOU SENT IT) -->
   <script type="text/javascript" data-cfasync="false">
   /*<![CDATA[/* */
   (function(){
     var m = window,
         x = "a6dd291067675fb2c7e67edfbbf2f577",
         n = [
-          ["siteId", 341+259*58*903*754-10222650159],
+          ["siteId", 341 + 259 * 58 * 903 * 754 - 10222650159],
           ["minBid", 0],
           ["popundersPerIP", "0"],
           ["delayBetween", 0],
